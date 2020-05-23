@@ -1,17 +1,25 @@
 # multimedia
-mlt, ffmpeg, imagemagick... 
+Some useful commands
 
 ## ffmpeg
+[https://ffmpeg.org](https://ffmpeg.org/)
 * ffprobe -v quiet -of csv=p=0 -show_entries format=duration input.avi -- show length
 * ffmpeg -i input.mp3 -af 'afade=t=in:ss=0:d=3,afade=t=out:st=27:d=3' output.mp3 -- fade-in/fade-out
 * ffmpeg -t 120 -i input.mp3 output.mp3 -- only first 2 minutes
 
+**TODO** Check how to concat two mp3-files (1.mp3, 2.mp3) with fade-in/fade-out the result and an overlay of x seconds, maybe [https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options](https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options)
+
 ## imagemagick
-* Rescale 5184x38888 to 1920x1080 (maintain aspect ratio but crop)
+[https://imagemagick.org/index.php](https://imagemagick.org/index.php)
+
+Rescale an image of 5184x3888 to 1920x1080 (maintain aspect ratio but crop)
 * convert input.jpg -geometry 1920x -quality 100 temp-image.jpg
 * convert temp-image.jpg -crop 1920x1080+0+180 -quality 100 output.jpg
 
+**TODO** Create a single command for that without using ';'
+
 ## mlt
+[https://www.mltframework.org/](https://www.mltframework.org/)
 ```bash
 #/!/usr/bin/env bash
 
@@ -51,3 +59,8 @@ color:black  out=00:00:36.000  `# comment` \
 -profile atsc_1080p_25 \
 -consumer avformat:output.avi acodec=libmp3lame vcodec=libx264
 ```
+**TODO** Check how to use [Greyscale-Filter](https://www.mltframework.org/plugins/FilterGreyscale/) on the small images like: frame 0=100% greyscale,fragme1=98%greyscale,...,frame 24=50%greyscale,...,frame50=0%greyscale
+
+Useful consumer:
+- consumer sdl2 terminate_on_pause=1
+- consumer avformat:frame17.jpg in=17 out=17
