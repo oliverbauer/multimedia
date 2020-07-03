@@ -6,37 +6,7 @@ Some useful commands
 * ffprobe -v quiet -of csv=p=0 -show_entries format=duration input.avi -- show length
 * ffmpeg -i input.mp3 -af 'afade=t=in:ss=0:d=3,afade=t=out:st=27:d=3' output.mp3 -- fade-in/fade-out
 * ffmpeg -t 120 -i input.mp3 output.mp3 -- only first 2 minutes
-
-### Updating ffmpeg
-Previously:
-```
-ffmpeg version 3.4.6-0ubuntu0.18.04.1 Copyright (c) 2000-2019 the FFmpeg developers
-  built with gcc 7 (Ubuntu 7.3.0-16ubuntu3)
-  configuration: --prefix=/usr --extra-version=0ubuntu0.18.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --enable-gpl --disable-stripping --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librubberband --enable-librsvg --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libopencv --enable-libx264 --enable-shared
-```
-Using:
-```
-sudo add-apt-repository ppa:savoury1/ffmpeg4
-sudo add-apt-repository ppa:savoury1/graphics
-sudo add-apt-repository ppa:savoury1/multimedia
-sudo apt-get update
-sudo apt-get install ffmpeg
-ffmpeg -version
-```
-(from http://ubuntuhandbook.org/index.php/2019/08/install-ffmpeg-4-2-ubuntu-18-04/)
-
-Result:
-```
-ffmpeg version 4.2.2-1ubuntu1~18.04.sav0 Copyright (c) 2000-2019 the FFmpeg developers
-built with gcc 7 (Ubuntu 7.5.0-3ubuntu1~18.04)
-configuration: --prefix=/usr --extra-version='1ubuntu1~18.04.sav0' --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-nvenc --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
-```
-
-Significant: **--enable-libvidstab**, but **--enable-libopencv** is missing!
-
-Maybe i need to compile on my one, for different enabled configurations check
-http://www.iiwnz.com/install-ffmpeg-4/
-
+* ffmpeg -ss 00:00:00.636 -i input.MP4 -frames:v 1 -vf "scale=iw/4:ih/4" frame.png -- extract a frame and rescale
 
 **TODO** Check how to concat two mp3-files (1.mp3, 2.mp3) with fade-in/fade-out the result and an overlay of x seconds, maybe [https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options](https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options)
 
