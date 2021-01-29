@@ -10,6 +10,31 @@ Some useful commands
 
 **TODO** Check how to concat two mp3-files (1.mp3, 2.mp3) with fade-in/fade-out the result and an overlay of x seconds, maybe [https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options](https://www.ffmpeg.org/ffmpeg-all.html#Audio-Options)
 
+A small script to convert video files.
+```
+#!/bin/bash
+# Sources:
+# https://trac.ffmpeg.org/wiki/Create%20a%20mosaic%20out%20of%20several%20input%20videos
+# https://stackoverflow.com/questions/11552565/vertically-or-horizontally-stack-several-videos-using-ffmpeg
+# https://ffmpeg.org/pipermail/ffmpeg-user/2017-August/037057.html
+
+if [ -z "$1" ]
+    then
+        echo "Usage:" 
+        echo  "stabilizator.sh filename.mp4"
+        exit 0
+fi
+
+ffmpeg -y -i $1 \
+      -vf vidstabdetect=stepsize=32:shakiness=10:accuracy=10:result=transforms.trf \
+      -c:v libx264 -b:v 5000k -s 1920x1080 -an -pass 1 -f rawvideo /dev/null
+ffmpeg -y -i $1 \
+      -vf vidstabtransform=input=transforms.trf:zoom=0:smoothing=10,unsharp=5:5:0.8:3:3:0.4 \
+      -vcodec libx264 -b:v 5000k -s 1920x1080 -c:a libmp3lame -b:a 192k -ac 2 -ar 44100 -pass 2 \
+      ${1%.*}_twoSteps.mp4
+```
+The vidstabdetect maybe optimized...
+
 ## imagemagick
 [https://imagemagick.org/index.php](https://imagemagick.org/index.php)
 
