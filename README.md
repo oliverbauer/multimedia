@@ -139,3 +139,26 @@ color:black  out=00:00:36.000  `# comment` \
 Useful consumer:
 - consumer sdl2 terminate_on_pause=1
 - consumer avformat:frame17.jpg in=17 out=17
+
+```
+#/!/usr/bin/env bash
+
+path=/home/oliver/.../02_Baerenschuetzklamm
+
+miximg=' out=249 -mix 50 -mixer luma -mixer mix:-1'
+mixvid=' -mix 50 -mixer luma -mixer mix:-1'
+
+melt \
+-track \
+   $path/10_20_34-1-1080p.jpg out=249 \
+   $path/10_36_18-1-1080p.jpg $miximg \
+   $path/10_41_39_twoSteps.mp4 $mixvid \
+...
+   $path/15_05_31-1-1080p.jpg $miximg \
+\
+ \
+ -transition mix:-1 always_active=1 a_track=0 b_track=1 sum=1  \
+ -transition frei0r.cairoblend a_track=0 b_track=1 disable=0 \
+ -profile atsc_1080p_50 \
+ -consumer avformat:2017-10-02-baerenschuetzklamm.avi acodec=libmp3lame vcodec=libx264 b=5000k
+```
