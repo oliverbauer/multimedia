@@ -1,6 +1,9 @@
 ## imagemagick
 [https://imagemagick.org/index.php](https://imagemagick.org/index.php)
 
+Examples:
+* [Pan image from left to right](/combined/imagemagick-and-ffmpeg/pan-from-left-to-right-over-part-of-4k-image) (includes [FFmpeg](/ffmpeg))
+
 Rescale an image of 5184x3888 to 1920x1080 (maintain aspect ratio but crop)
 * convert input.jpg -geometry 1920x -quality 100 temp-image.jpg
 * convert temp-image.jpg -crop 1920x1080+0+180 -quality 100 output.jpg

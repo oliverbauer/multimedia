@@ -2,6 +2,9 @@
 
 Some notes for creating videos from my holidays on CLI (wrapped in some scripts)
 
+Examples:
+* [Pan image from left to right](/combined/imagemagick-and-ffmpeg/pan-from-left-to-right-over-part-of-4k-image) (includes [Imagemagick](/imagemagick))
+
 ## speedup video
 
 Scale down a gopro vid to 1080p, speedup by factor 2 and use only 25fps with (default) h264 codec: 
