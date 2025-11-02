@@ -1,9 +1,9 @@
+# Examples:
+* [Pan image from left to right](/combined/imagemagick-and-ffmpeg/pan-from-left-to-right-over-part-of-4k-image.md) (includes [Imagemagick](/imagemagick.md))
+
 # ffmpeg
 
 Some notes for creating videos from my holidays on CLI (wrapped in some scripts)
-
-Examples:
-* [Pan image from left to right](/combined/imagemagick-and-ffmpeg/pan-from-left-to-right-over-part-of-4k-image) (includes [Imagemagick](/imagemagick))
 
 ## speedup video
 
