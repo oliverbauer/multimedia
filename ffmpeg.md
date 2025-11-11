@@ -1,5 +1,6 @@
 # Examples:
 * [Pan image from left to right](/combined/imagemagick-and-ffmpeg/pan-from-left-to-right-over-part-of-4k-image.md) (includes [Imagemagick](/imagemagick.md))
+* [Fade-in 2 images incl. alpha-channel](/combined/imagemagick-and-ffmpeg-2/fade-in-two-images-including-overlay.md) (includes [Imagemagick](/imagemagick.md))
 
 # ffmpeg
 
@@ -50,6 +51,20 @@ ffmpeg\
       [f0][s2]xfade=transition=circleopen:duration=2:offset=8" \
   -t 13 -c:v libx264 -y output.mp4
 ```
+
+or one further example:
+
+```sh
+ffmpeg -loglevel quiet -threads 2 \
+ -loop 1 -framerate 25 -t 5 -i input.jpg \
+ -i silentaudio.mp3 \
+ -filter_complex "[0:v]scale=8000:-1,zoompan=z='zoom+0.001':s=3840x2160:x=iw/2-(iw/zoom/2):y=ih/2-(ih/zoom/2):d=125[v];[1:a]atrim=0:5[a]" \
+ -acodec aac -vcodec libx264 -map [v] -map [a] -t 5 \
+ -y  \
+ -r 25 -pix_fmt yuv420p  -crf 20 output.mp4
+```
+
+**Note**: Merging more than approx 20 sources (images, video) uses a lot of RAM (at least at 4K)! My PC crashes everytime.
 
 ## put text on video
 Example to put text at different positions and times:
